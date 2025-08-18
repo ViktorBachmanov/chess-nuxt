@@ -1,39 +1,24 @@
 <script setup>
-const {
-  status,
-  data,
-  lastRefreshedAt,
-  token,
-  refreshToken,
-  getSession,
-  signUp,
-  signIn,
-  signOut,
-  refresh
-} = useAuth()
 
-console.log('token: ', token.value)
-console.log('status: ', status.value)
-
-async function handleLogin() {
-  // await $fetch('/api/login', {
-  //   method: "POST",
-  //   body: {
-  //     username: 'ustas',
-  //     password: 'pass123'
-  //   }
-  // })
-  await signIn({ username: 'ustas', password: 'pass123' }, { callbackUrl: '/' })
-}
 </script>
 
 <template>
   <UApp>
-    Chess-Nuxt <ColorModeButton /><br>
-    <UButton
+    <div
+      class="flex justify-between p-4"
+    >
+      <AdminMenu />
+
+      <h1 class="font-medium text-2xl">
+        Шахматный клуб
+      </h1>
+
+      <ColorModeButton />
+    </div>
+    <!-- <UButton
       @click="handleLogin"
     >
       Log in
-    </UButton>
+    </UButton> -->
   </UApp>
 </template>
