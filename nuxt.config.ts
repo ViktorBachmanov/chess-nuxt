@@ -7,21 +7,21 @@ export default defineNuxtConfig({
   auth: {
     provider: {
       type: 'local',
-      endpoints: {
-        signIn: { path: '/login', method: 'post' },
-        signOut: { path: '/logout', method: 'post' },
-      },
-      token: {
-        signInResponseTokenPointer: '/token',
-        type: 'Bearer',
-        cookieName: 'auth.token',
-        headerName: 'Authorization',
-        maxAgeInSeconds: 1800,
-        sameSiteAttribute: 'lax',
-        cookieDomain: 'sidebase.io',
-        secureCookieAttribute: false,
-        httpOnlyCookieAttribute: false,
-      }
+      // endpoints: {
+      //   signIn: { path: '/login', method: 'post' },
+      //   signOut: { path: '/logout', method: 'post' },
+      // },
+      // token: {
+      //   signInResponseTokenPointer: '/token',
+      //   type: 'Bearer',
+      //   cookieName: 'auth.token',
+      //   headerName: 'Authorization',
+      //   maxAgeInSeconds: 1800,
+      //   sameSiteAttribute: 'lax',
+      //   cookieDomain: 'sidebase.io',
+      //   secureCookieAttribute: false,
+      //   httpOnlyCookieAttribute: false,
+      // }
     }
   }
 })
