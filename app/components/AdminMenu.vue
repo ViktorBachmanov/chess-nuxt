@@ -21,7 +21,12 @@ console.log('data: ', data.value)
 // console.log('session: ', session)
 
 async function handleLogin() {
-  await signIn({ username: 'ustas', password: 'pass123' }, { callbackUrl: '/' })
+  let res
+  try {
+    await signIn({ username: 'ustas', password: 'pass123' }, { callbackUrl: '/', callGetSession: false })
+  } catch (e: any) {
+    console.log('e:', e)
+  } 
 
   // console.log('session: ', await getSession())
 }

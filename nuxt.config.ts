@@ -23,5 +23,25 @@ export default defineNuxtConfig({
       //   httpOnlyCookieAttribute: false,
       // }
     }
+  },
+  app: {
+    head: {
+      script: [
+        { 
+          src: "https://telegram.org/js/telegram-widget.js?22", 
+          async: true, 
+          'data-telegram-login': "ChessNuxtBot",
+          'data-size': "medium",
+          'data-onauth': "onTelegramAuth(user)",
+          'data-request-access': "write",
+          tagPosition: 'bodyClose',
+        },
+        {
+          type: "text/javascript",
+          src: "js/tg_script.js",
+          tagPosition: 'bodyClose',
+        }
+      ],
+    }
   }
 })

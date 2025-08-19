@@ -7,8 +7,22 @@ export default defineEventHandler(async (event) => {
   const formData = await readBody(event)
   console.log('formData:', formData)
 
+  const isPasswordOk = verifyPassword(formData.username, formData.password)
+  console.log('isPasswordOk:', isPasswordOk)
 
-  return { 
-    token: 'AUTH_TOKEN',
-   }
+  if (!isPasswordOk) {
+    throw createError({
+      statusCode: 422,
+      statusMessage: 'Wrong username or password',
+      fatal: true,
+    })
+
+    // setResponseStatus(event, 422)
+    // return {
+    //   statusMessage: 'Wrong username or password',
+    //   token: null,
+    // }
+  }
+
+  return { token: 'AUTH_TOKEN' }
 })
