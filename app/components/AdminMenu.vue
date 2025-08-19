@@ -48,7 +48,7 @@ const items = computed(() => [
    <UDropdownMenu
     :items="items"
     :ui="{
-      content: 'w-48'
+      content: 'w-48 dark:bg-slate-700'
     }"
   >
     <UButton icon="i-lucide-menu" color="neutral" variant="outline" />

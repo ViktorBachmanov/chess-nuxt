@@ -5,7 +5,7 @@
 <template>
   <UApp>
     <div
-      class="flex justify-between p-4"
+      class="flex justify-between p-4 shadow-lg dark:bg-slate-800"
     >
       <AdminMenu />
 
