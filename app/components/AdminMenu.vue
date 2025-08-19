@@ -1,49 +1,19 @@
 <script setup lang="ts">
-const {
-  status,
-  data,
-  lastRefreshedAt,
-  token,
-  refreshToken,
-  getSession,
-  signUp,
-  signIn,
-  signOut,
-  refresh
-} = useAuth()
-
-console.log('status: ', status.value)
-console.log('token: ', token.value)
-// console.log('data: ', data.value)
-
-// const session = await getSession()
-
-// console.log('session: ', session)
 
 async function handleLogin() {
-  let res
-  try {
-    await signIn({ username: 'ustas', password: 'pass123' }, { callbackUrl: '/', callGetSession: false })
-  } catch (e: any) {
-    console.log('e:', e)
-  } 
 
-  // console.log('session: ', await getSession())
 }
-
-// const isAuth = computed(() => status.value == 'authenticated')
 
 const items = computed(() => [
   [
     {
       label: 'Войти',
-      disabled: status.value == 'authenticated',
+      disabled: false,
       onSelect: handleLogin
     },
      {
       label: 'Выйти',
-      disabled: status.value != 'authenticated',
-      onSelect: () => signOut({ callbackUrl: '/' })
+      disabled: true,
     },
   ]
 ])

@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@nuxt/ui": "^3.3.2",
-    "@sidebase/nuxt-auth": "^1.0.1",
-    "next-auth": "~4.21.1",
     "nuxt": "^4.0.3",
     "typescript": "^5.9.2",
     "vue": "^3.5.18",

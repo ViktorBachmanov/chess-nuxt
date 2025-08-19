@@ -8,8 +8,6 @@
   >
     <AdminMenu />
 
-    <!-- <TgScript /> -->
-
     <h1 class="font-medium text-2xl">
       Шахматный клуб
     </h1>
