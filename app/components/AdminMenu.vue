@@ -14,7 +14,7 @@ const {
 
 console.log('status: ', status.value)
 console.log('token: ', token.value)
-console.log('data: ', data.value)
+// console.log('data: ', data.value)
 
 // const session = await getSession()
 
