@@ -9,7 +9,7 @@ async function login() {
     await $fetch('/api/login', {
       method: 'POST',
       body: {
-        username: 'ustas',
+        username: 'Бачманов В.В.',
         password: 'password123'
       }
     })

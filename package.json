@@ -13,6 +13,7 @@
     "@nuxt/ui": "^3.3.2",
     "nuxt": "^4.0.3",
     "nuxt-auth-utils": "^0.5.23",
+    "serverless-mysql": "^2.1.0",
     "typescript": "^5.9.2",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"

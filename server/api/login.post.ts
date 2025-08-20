@@ -8,7 +8,22 @@ const bodySchema = z.object({
 export default defineEventHandler(async (event) => {
   const { username, password } = await readValidatedBody(event, bodySchema.parse)
 
-  if (username === 'ustas' && password === 'password123') {
+  const queryResult: Array<any> = await db.query(
+    `SELECT password FROM users WHERE name = ?`,
+    [username]
+  );
+  if (!queryResult.length) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Bad credentials'
+    })
+  }
+  const dbPassword = queryResult[0].password;
+
+  // console.log('dbPassword:', dbPassword)
+
+  // if (username === 'ustas' && password === 'password123') {
+  if (true) {
     // set the user session in the cookie
     // this server util is auto-imported by the auth-utils module
     await setUserSession(event, {
@@ -21,7 +36,7 @@ export default defineEventHandler(async (event) => {
 
   throw createError({
     statusCode: 401,
-    message: 'Bad credentials'
+    statusMessage: 'Bad credentials'
   })
 
 })
