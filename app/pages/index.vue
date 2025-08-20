@@ -1,5 +1,14 @@
 <script setup>
-const { data: users } = useFetch('/api/users')
+// const { data: users } = useFetch('/api/users')
+
+const { data } = await useAsyncData('users-games', async () => {
+  const [users, games] = await Promise.all([
+    $fetch('/api/users'),
+    $fetch('/api/games'),
+  ])
+
+  return { users, games }
+})
 </script>
 
 <template>
@@ -16,6 +25,10 @@ const { data: users } = useFetch('/api/users')
   </div>
 
   <MainTable
-    :users="users"
+    :users="data.users"
+  />
+
+  <GamesTable
+    :games="data.games"
   />
 </template>

@@ -25,7 +25,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
-th, td {
+th, :deep(td) {
   padding: 0.33em;
   border: 0.5px solid;
 }

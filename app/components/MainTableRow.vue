@@ -11,9 +11,3 @@ const props = defineProps({
   </tr>
 </template>
 
-<style scoped>
-th, td {
-  padding: 0.33em;
-  border: 0.5px solid;
-}
-</style>
