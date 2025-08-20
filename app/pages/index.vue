@@ -1,5 +1,5 @@
 <script setup>
-
+const { data: users } = useFetch('/api/users')
 </script>
 
 <template>
@@ -14,4 +14,8 @@
 
     <ColorModeButton />
   </div>
+
+  <MainTable
+    :users="users"
+  />
 </template>
