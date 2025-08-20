@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import bcrypt from "bcrypt"
 
 const bodySchema = z.object({
   username: z.string(),
@@ -20,7 +21,9 @@ export default defineEventHandler(async (event) => {
   }
   const dbPassword = queryResult[0].password;
 
-  // console.log('dbPassword:', dbPassword)
+  const rslt = await bcrypt.compare(password, dbPassword)
+
+  // console.log('bcrypt.compare:', rslt)
 
   // if (username === 'ustas' && password === 'password123') {
   if (true) {
