@@ -2,26 +2,6 @@
 
 const { loggedIn, session, user, clear, fetch: refreshSession } = useUserSession()
 
-const toast = useToast()
-
-async function login() {
-  try {
-    await $fetch('/api/login', {
-      method: 'POST',
-      body: {
-        username: 'Бачманов В.В.',
-        password: 'password123'
-      }
-    })
-    refreshSession()
-  } catch (e: any) {
-    console.log('e:', e)
-    toast.add({
-      description: e.statusMessage
-    })
-  }
-}
-
 const open = ref(false)
 
 const items = computed(() => [
@@ -54,6 +34,7 @@ const items = computed(() => [
 
     <LoginDialog
       v-model="open"
+      @logged="refreshSession"
     />
   </div>
 </template>
