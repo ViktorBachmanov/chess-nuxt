@@ -22,12 +22,14 @@ async function login() {
   }
 }
 
+const open = ref(false)
+
 const items = computed(() => [
   [
     {
       label: 'Войти',
       disabled: loggedIn.value,
-      onSelect: login
+      onSelect: () => open.value = true
     },
      {
       label: 'Выйти',
@@ -36,15 +38,22 @@ const items = computed(() => [
     },
   ]
 ])
+
 </script>
 
 <template>
-   <UDropdownMenu
-    :items="items"
-    :ui="{
-      content: 'w-48 dark:bg-slate-700'
-    }"
-  >
-    <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
-  </UDropdownMenu>
+  <div>
+    <UDropdownMenu
+      :items="items"
+      :ui="{
+        content: 'w-48 dark:bg-slate-700'
+      }"
+    >
+      <UButton icon="i-lucide-menu" color="neutral" variant="outline" />
+    </UDropdownMenu>
+
+    <LoginDialog
+      v-model="open"
+    />
+  </div>
 </template>
