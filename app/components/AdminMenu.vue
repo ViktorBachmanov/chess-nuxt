@@ -1,19 +1,38 @@
 <script setup lang="ts">
 
-async function handleLogin() {
+const { loggedIn, session, user, clear, fetch: refreshSession } = useUserSession()
 
+const toast = useToast()
+
+async function login() {
+  try {
+    await $fetch('/api/login', {
+      method: 'POST',
+      body: {
+        username: 'ustas',
+        password: 'password123'
+      }
+    })
+    refreshSession()
+  } catch (e: any) {
+    console.log('e:', e)
+    toast.add({
+      description: e.statusMessage
+    })
+  }
 }
 
 const items = computed(() => [
   [
     {
       label: 'Войти',
-      disabled: false,
-      onSelect: handleLogin
+      disabled: loggedIn.value,
+      onSelect: login
     },
      {
       label: 'Выйти',
-      disabled: true,
+      disabled: !loggedIn.value,
+      onSelect: clear
     },
   ]
 ])
