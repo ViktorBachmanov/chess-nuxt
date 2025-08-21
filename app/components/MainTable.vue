@@ -12,13 +12,16 @@ const props = defineProps({
       <tr>
         <th>№</th>
         <th>ФИО</th>
+        <th>Очки</th>
+        <th>Игры</th>
+        <th>Рейтинг</th>
       </tr>
     </thead>
 
     <tbody>
       <MainTableRow
         v-for="user in users"
-        :user-data="user"
+        :user="user"
       />
     </tbody>
   </table>

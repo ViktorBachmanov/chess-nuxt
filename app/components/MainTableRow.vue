@@ -1,13 +1,21 @@
 <script setup>
 const props = defineProps({
-  userData: Object,
+  user: Object,
 })
 </script>
 
 <template>
   <tr>
-    <td>{{ userData.id }}</td>
-    <td>{{ userData.name }}</td>
+    <td>{{ user.id }}</td>
+    <td style="text-align: left;">{{ user.name }}</td>
+    <td>{{ user.score }}</td>
+    <td>{{ user.games }}</td>
+    <td>{{ user.rating }}</td>
   </tr>
 </template>
 
+<style scoped>
+td {
+  text-align: right;
+}
+</style>
