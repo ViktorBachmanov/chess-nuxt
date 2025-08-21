@@ -2,7 +2,7 @@
 const props = defineProps({
   user: Object,
   num: Number,
-  usersTotal: Number,
+  users: Array,
 })
 </script>
 
@@ -19,8 +19,9 @@ const props = defineProps({
     </td>
 
     <td
-      v-for="userIndex in usersTotal"
+      v-for="cellUser in users"
     >
+      {{ user.opponents[cellUser.id] }}
     </td>
 
     <td>{{ user.score }}</td>

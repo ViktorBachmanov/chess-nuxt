@@ -8,14 +8,25 @@ const transformedUsers = ref([])
 
 // console.log('transformedUsers:', transformedUsers.value)
 
+const sortBy = ref('rating')  // rating | score
+
 watch(() => props.games, newGames => {
   transformedUsers.value = props.users.map(user => ({ ...user }))
   transformUsers(newGames), { immediate: true }
+  sortUsers(sortBy.value)
 }, {
   immediate: true
 })
 
-console.log('transformedUsers:', transformedUsers.value)
+watch(sortBy, newSorting => sortUsers(newSorting))
+
+function sortUsers(sorting) {
+  transformedUsers.value.sort((a, b) => {
+    return b[sorting] - a[sorting]
+  })
+}
+
+// console.log('transformedUsers:', transformedUsers.value)
 
 function transformUsers(games) {
   transformedUsers.value.forEach(user => user.opponents = {})
@@ -66,9 +77,29 @@ function updateOpponent (user, opponentId, score) {
           {{ index + 1 }}
         </th>
 
-        <th>Очки</th>
+        <th>
+          <label for="radio_score_id">
+            Очки
+          </label>
+          <input
+            type="radio"
+            v-model="sortBy"
+            value="score"
+            id="radio_score_id"
+          >
+        </th>
         <th>Игры</th>
-        <th>Рейтинг</th>
+        <th>
+          <label for="radio_rating_id">
+            Рейтинг
+          </label>
+          <input
+            type="radio"
+            v-model="sortBy"
+            value="rating"
+            id="radio_rating_id"
+          >
+        </th>
       </tr>
     </thead>
 
@@ -77,7 +108,7 @@ function updateOpponent (user, opponentId, score) {
         v-for="(user, index) in transformedUsers"
         :user="user"
         :num="index + 1"
-        :users-total="transformedUsers.length"
+        :users="transformedUsers"
       />
     </tbody>
   </table>
