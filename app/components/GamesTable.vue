@@ -1,7 +1,19 @@
 <script setup>
 const props = defineProps({
   games: Array,
+  users: Array,
 })
+
+const usersNames = computed(() => {
+  const obj = {}
+
+  props.users.forEach(user => {
+    obj[user.id] = user.name
+  })
+
+  return obj
+})
+
 </script>
 
 <template>
@@ -20,13 +32,13 @@ const props = defineProps({
         v-for="game in games"
       >
         <td>
-          {{ game.white }}
+          {{ usersNames[game.white] }}
         </td>
         <td>
           {{ new Date(game.date).toLocaleDateString('ru-RU') }}
         </td>
         <td>
-          {{ game.black }}
+          {{ usersNames[game.black] }}
         </td>
       </tr>
     </tbody>
@@ -36,6 +48,6 @@ const props = defineProps({
 <style scoped>
 th, td {
   padding: 0.25em;
-  border: 0.5px solid;
+  /* border: 0.5px solid; */
 }
 </style>

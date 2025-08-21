@@ -48,6 +48,7 @@ watch(day, newVal => {
 
     <GamesTable
       :games="data.games"
+      :users="data.users"
     />
   </div>
 </template>
