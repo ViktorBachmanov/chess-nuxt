@@ -3,14 +3,15 @@
 
 const day = ref('all')
 
+const { data: days } = useFetch('/api/days')
+
 const { data, refresh } = await useAsyncData('users-games', async () => {
-  const [users, games, days] = await Promise.all([
+  const [users, games ] = await Promise.all([
     $fetch(`/api/users?day=${day.value}`),
     $fetch(`/api/games?day=${day.value}`),
-    $fetch('/api/days'),
   ])
 
-  return { users, games, days }
+  return { users, games }
 })
 
 watch(day, newVal => {
@@ -36,7 +37,7 @@ watch(day, newVal => {
     class="flex flex-col gap-10 items-center"
   >
     <SelectDay
-      :days="data.days"
+      :days="days"
       v-model="day"
       class="mt-10"
     />
