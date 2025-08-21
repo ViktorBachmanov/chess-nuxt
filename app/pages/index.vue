@@ -44,6 +44,7 @@ watch(day, newVal => {
 
     <MainTable
       :users="data.users"
+      :games="data.games"
     />
 
     <GamesTable

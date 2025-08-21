@@ -1,7 +1,55 @@
 <script setup>
 const props = defineProps({
   users: Array,
+  games: Array,
 })
+
+const transformedUsers = ref([])
+
+// console.log('transformedUsers:', transformedUsers.value)
+
+watch(() => props.games, newGames => {
+  transformedUsers.value = props.users.map(user => ({ ...user }))
+  transformUsers(newGames), { immediate: true }
+}, {
+  immediate: true
+})
+
+console.log('transformedUsers:', transformedUsers.value)
+
+function transformUsers(games) {
+  transformedUsers.value.forEach(user => user.opponents = {})
+  
+  games.forEach(game => { 
+    if (game.winner) {
+      const winner = transformedUsers.value.find(user => user.id === game.winner)
+      const loserId = game.white === winner.id
+        ? game.black
+        : game.white
+      updateOpponent(winner, loserId, 1)
+    } else {
+      const whiteUser = transformedUsers.value.find(user => user.id === game.white)
+      const blackUser = transformedUsers.value.find(user => user.id === game.black)
+
+      updateOpponent(whiteUser, blackUser.id, 0.5)
+      updateOpponent(blackUser, whiteUser.id, 0.5)
+    }
+  })
+
+  transformedUsers.value.forEach(user => {
+    user.score = Object.values(user.opponents).reduce((sum, oppScore) => {
+      return sum + oppScore
+    }, 0)
+  })
+}
+
+function updateOpponent (user, opponentId, score) {
+  if (user.opponents[opponentId]) {
+    user.opponents[opponentId] += score
+  } else {
+    user.opponents[opponentId] = score
+  }
+}
 </script>
 
 <template>
@@ -13,7 +61,7 @@ const props = defineProps({
         <th>ФИО</th>
 
         <th
-          v-for="(userIndex, index) in users.length"
+          v-for="(userIndex, index) in transformedUsers.length"
         >
           {{ index + 1 }}
         </th>
@@ -26,10 +74,10 @@ const props = defineProps({
 
     <tbody>
       <MainTableRow
-        v-for="(user, index) in users"
+        v-for="(user, index) in transformedUsers"
         :user="user"
         :num="index + 1"
-        :users-total="users.length"
+        :users-total="transformedUsers.length"
       />
     </tbody>
   </table>

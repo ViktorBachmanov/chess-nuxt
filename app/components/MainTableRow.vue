@@ -23,7 +23,7 @@ const props = defineProps({
     >
     </td>
 
-    <td></td>
+    <td>{{ user.score }}</td>
     <td>{{ user.games }}</td>
     <td>{{ user.rating }}</td>
   </tr>
