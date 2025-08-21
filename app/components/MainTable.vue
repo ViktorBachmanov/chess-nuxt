@@ -37,7 +37,10 @@ function transformUsers(games) {
       const loserId = game.white === winner.id
         ? game.black
         : game.white
+      const loser = transformedUsers.value.find(user => user.id === loserId)
+
       updateOpponent(winner, loserId, 1)
+      updateOpponent(loser, winner.id, 0)
     } else {
       const whiteUser = transformedUsers.value.find(user => user.id === game.white)
       const blackUser = transformedUsers.value.find(user => user.id === game.black)
