@@ -6,7 +6,6 @@ const props = defineProps({
 
 <template>
   <table
-    class="mt-10 mx-auto"
   >
     <thead>
       <tr>

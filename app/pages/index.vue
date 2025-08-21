@@ -2,12 +2,13 @@
 // const { data: users } = useFetch('/api/users')
 
 const { data } = await useAsyncData('users-games', async () => {
-  const [users, games] = await Promise.all([
+  const [users, games, days] = await Promise.all([
     $fetch('/api/users'),
     $fetch('/api/games'),
+    $fetch('/api/days'),
   ])
 
-  return { users, games }
+  return { users, games, days }
 })
 </script>
 
@@ -24,11 +25,20 @@ const { data } = await useAsyncData('users-games', async () => {
     <ColorModeButton />
   </div>
 
-  <MainTable
-    :users="data.users"
-  />
+  <div
+    class="flex flex-col gap-10 items-center"
+  >
+    <SelectDay
+      :days="data.days"
+      class="mt-10"
+    />
 
-  <GamesTable
-    :games="data.games"
-  />
+    <MainTable
+      :users="data.users"
+    />
+
+    <GamesTable
+      :games="data.games"
+    />
+  </div>
 </template>
