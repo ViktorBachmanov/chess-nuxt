@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const days = db.query("SELECT DISTINCT(date) FROM games ORDER BY date DESC")
+  const days = await db.query("SELECT DISTINCT(DATE_FORMAT(date, '%Y-%m-%d')) AS date FROM games ORDER BY date DESC")
 
   return days
 })

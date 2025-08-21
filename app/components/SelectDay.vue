@@ -3,6 +3,8 @@ const props = defineProps({
   days: Array,
 })
 
+const day = defineModel()
+
 const flattenDays = props.days.map(day => ({
   label: new Date(day.date).toLocaleDateString('ru-RU'),
   value: day.date,
@@ -10,10 +12,8 @@ const flattenDays = props.days.map(day => ({
 
 flattenDays.unshift({
   label: 'Все',
-  value: 'all',
+  value: 'all'
 })
-
-const day = ref(flattenDays[0])
 </script>
 
 <template>

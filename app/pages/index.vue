@@ -1,14 +1,21 @@
 <script setup>
 // const { data: users } = useFetch('/api/users')
 
-const { data } = await useAsyncData('users-games', async () => {
+const day = ref('all')
+
+const { data, refresh } = await useAsyncData('users-games', async () => {
   const [users, games, days] = await Promise.all([
-    $fetch('/api/users'),
-    $fetch('/api/games'),
+    $fetch(`/api/users?day=${day.value}`),
+    $fetch(`/api/games?day=${day.value}`),
     $fetch('/api/days'),
   ])
 
   return { users, games, days }
+})
+
+watch(day, newVal => {
+  // console.log('day:', day.value)
+  refresh()
 })
 </script>
 
@@ -30,6 +37,7 @@ const { data } = await useAsyncData('users-games', async () => {
   >
     <SelectDay
       :days="data.days"
+      v-model="day"
       class="mt-10"
     />
 
