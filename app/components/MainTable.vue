@@ -12,6 +12,13 @@ const props = defineProps({
       <tr>
         <th>№</th>
         <th>ФИО</th>
+
+        <th
+          v-for="(userIndex, index) in users.length"
+        >
+          {{ index + 1 }}
+        </th>
+
         <th>Очки</th>
         <th>Игры</th>
         <th>Рейтинг</th>
@@ -20,8 +27,10 @@ const props = defineProps({
 
     <tbody>
       <MainTableRow
-        v-for="user in users"
+        v-for="(user, index) in users"
         :user="user"
+        :num="index + 1"
+        :users-total="users.length"
       />
     </tbody>
   </table>
