@@ -14,6 +14,17 @@ const usersNames = computed(() => {
   return obj
 })
 
+const whiteClass = function(game, color) {
+  if (!game.winner) {
+    return ''
+  }
+
+  if (game.winner == game[color]) {
+    return 'win'
+  } else {
+    return 'lose'
+  }
+}
 </script>
 
 <template>
@@ -31,13 +42,17 @@ const usersNames = computed(() => {
       <tr
         v-for="game in games"
       >
-        <td>
+        <td
+          :class="whiteClass(game, 'white')"
+        >
           {{ usersNames[game.white] }}
         </td>
         <td>
           {{ new Date(game.date).toLocaleDateString('ru-RU') }}
         </td>
-        <td>
+        <td
+          :class="whiteClass(game, 'black')"
+        >
           {{ usersNames[game.black] }}
         </td>
       </tr>
@@ -49,5 +64,29 @@ const usersNames = computed(() => {
 th, td {
   padding: 0.25em;
   /* border: 0.5px solid; */
+}
+
+th {
+  background-color: white;
+
+  .dark & {
+    background-color: #1d293d;
+  }
+}
+
+.win {
+  background-color: #b2dfdb;
+
+  .dark & {
+    background-color: #00695c;
+  }
+}
+
+.lose {
+  background-color: #ffcdd2;
+
+  .dark & {
+    background-color: #c51162;
+  }
 }
 </style>

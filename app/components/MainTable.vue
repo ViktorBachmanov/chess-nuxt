@@ -67,59 +67,85 @@ function updateOpponent (user, opponentId, score) {
 </script>
 
 <template>
-  <table
+  <div
+    class="max-w-screen overflow-x-auto pr-2"
   >
-    <thead>
-      <tr>
-        <th>№</th>
-        <th>ФИО</th>
+    <table
+    >
+      <thead>
+        <tr>
+          <th>№</th>
+          <th>ФИО</th>
 
-        <th
-          v-for="(userIndex, index) in transformedUsers.length"
-        >
-          {{ index + 1 }}
-        </th>
-
-        <th>
-          <label for="radio_score_id">
-            Очки
-          </label>
-          <input
-            type="radio"
-            v-model="sortBy"
-            value="score"
-            id="radio_score_id"
+          <th
+            v-for="(userIndex, index) in transformedUsers.length"
           >
-        </th>
-        <th>Игры</th>
-        <th>
-          <label for="radio_rating_id">
-            Рейтинг
-          </label>
-          <input
-            type="radio"
-            v-model="sortBy"
-            value="rating"
-            id="radio_rating_id"
-          >
-        </th>
-      </tr>
-    </thead>
+            {{ index + 1 }}
+          </th>
 
-    <tbody>
-      <MainTableRow
-        v-for="(user, index) in transformedUsers"
-        :user="user"
-        :num="index + 1"
-        :users="transformedUsers"
-      />
-    </tbody>
-  </table>
+          <th>
+            <label for="radio_score_id">
+              Очки
+            </label>
+            <input
+              type="radio"
+              v-model="sortBy"
+              value="score"
+              id="radio_score_id"
+            >
+          </th>
+          <th>Игры</th>
+          <th>
+            <label for="radio_rating_id">
+              Рейтинг
+            </label>
+            <input
+              type="radio"
+              v-model="sortBy"
+              value="rating"
+              id="radio_rating_id"
+            >
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <MainTableRow
+          v-for="(user, index) in transformedUsers"
+          :user="user"
+          :num="index + 1"
+          :users="transformedUsers"
+        />
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped>
 th, :deep(td) {
   padding: 0.33em;
   border: 0.5px solid;
+}
+
+th:first-child, :deep(td:first-child) {
+  position: sticky;
+  left: 0;
+  background-color: #fcfbfdbd;
+  min-width: 2em;
+
+  .dark & {
+    background-color: #1d293d;
+  }
+}
+
+th:nth-child(2), :deep(td:nth-child(2)) {
+  position: sticky;
+  left: 2em;
+  background-color: #fcfbfdbd;
+  white-space: nowrap;
+
+  .dark & {
+    background-color: #1d293d;
+  }
 }
 </style>
