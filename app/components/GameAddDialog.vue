@@ -1,4 +1,6 @@
 <script setup>
+import { today } from '@internationalized/date'
+
 const { data: users } = await useFetch('/api/users')
 
 const open = ref(true)
@@ -15,6 +17,8 @@ const results = [
   { value: 'black', label: 'Чёрные' },
 ]
 
+const date = shallowRef(today('Europe/Paris'))
+
 const loading = ref(false)
 
 const emit = defineEmits(['added'])
@@ -23,15 +27,18 @@ const toast = useToast()
 
 async function handleSubmit() {
   loading.value = true
-  await new Promise(resolve => setTimeout(resolve, 2000))
-  loading.value = false
-  return
+  // await new Promise(resolve => setTimeout(resolve, 2000))
+  // loading.value = false
+  // return
 
   try {
     await $fetch('/api/games', {
       method: 'POST',
       body: {
-        
+        white: state.value.white,
+        black: state.value.black,
+        winner: state.value.winner,
+        date: `${date.value.year}-${date.value.month}-${date.value.day}`,        
       }
     })
     emit('added')
@@ -110,6 +117,10 @@ async function handleSubmit() {
             id="rslt_id"
           />
         </div>
+
+        <DatePicker
+          v-model="date"
+        />
 
         <UButton 
           type="submit"

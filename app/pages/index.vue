@@ -3,7 +3,7 @@
 
 const day = ref('all')
 
-const { data: days } = useFetch('/api/days')
+const { data: days, refresh: refreshDays } = useFetch('/api/days')
 
 const { data, refresh, status } = await useAsyncData('users-games', async () => {
   // await new Promise(res => setTimeout(res, 2000))
@@ -26,7 +26,9 @@ watch(day, newVal => {
   <div
     class="flex justify-between p-4 shadow-lg dark:bg-slate-800"
   >
-    <AdminMenu />
+    <AdminMenu
+      @game-added="() => { refreshDays(), refresh() }"
+    />
 
     <h1 class="font-medium text-2xl">
       Шахматный клуб

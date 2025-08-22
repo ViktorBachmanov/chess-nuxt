@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
     [username]
   );
   if (!queryResult.length) {
+    db.end()
     throw createError({
       statusCode: 401,
       statusMessage: 'Bad credentials'
@@ -25,8 +26,7 @@ export default defineEventHandler(async (event) => {
 
   // console.log('bcrypt.compare:', rslt)
 
-  // if (username === 'ustas' && password === 'password123') {
-  if (true) {
+  if (rslt) {
     // set the user session in the cookie
     // this server util is auto-imported by the auth-utils module
     await setUserSession(event, {
@@ -34,8 +34,11 @@ export default defineEventHandler(async (event) => {
         name: 'Ustas'
       }
     })
+    db.end()
     return {}
   }
+
+  db.end()
 
   throw createError({
     statusCode: 401,

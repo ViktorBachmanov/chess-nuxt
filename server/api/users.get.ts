@@ -4,6 +4,7 @@ export default defineEventHandler(async (event) => {
   if (day === 'all') {
     day = '%'
   } else if (day === undefined) {
+    db.end()
     return await db.query('SELECT u.id, u.name AS label FROM users u')
   }
 
@@ -17,6 +18,8 @@ export default defineEventHandler(async (event) => {
      ORDER BY rating DESC`,
      [day]
   )
+
+  db.end()
 
   return users
 })

@@ -14,5 +14,7 @@ export default defineEventHandler(async (event) => {
 
   // console.log('games:', games)
 
+  db.end()
+
   return games
 })

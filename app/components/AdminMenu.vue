@@ -29,6 +29,12 @@ const gameAddDialogIsOpen = ref(false)
 function openGameAddDialog() {
   gameAddDialogIsOpen.value = true
 }
+
+const emit = defineEmits(['game-added'])
+
+function handleGameAdded() {
+  emit('game-added')
+}
 </script>
 
 <template>
@@ -50,6 +56,7 @@ function openGameAddDialog() {
     <LazyGameAddDialog
       v-if="gameAddDialogIsOpen"
       @after:leave="gameAddDialogIsOpen = false"
+      @added="handleGameAdded"
     />
   </div>
 </template>
