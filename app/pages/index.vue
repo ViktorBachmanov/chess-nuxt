@@ -5,7 +5,9 @@ const day = ref('all')
 
 const { data: days } = useFetch('/api/days')
 
-const { data, refresh } = await useAsyncData('users-games', async () => {
+const { data, refresh, status } = await useAsyncData('users-games', async () => {
+  // await new Promise(res => setTimeout(res, 2000))
+
   const [users, games ] = await Promise.all([
     $fetch(`/api/users?day=${day.value}`),
     $fetch(`/api/games?day=${day.value}`),
@@ -40,6 +42,7 @@ watch(day, newVal => {
       :days="days"
       v-model="day"
       class="mt-10"
+      :status="status"
     />
 
     <MainTable

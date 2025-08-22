@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   days: Array,
+  status: String,
 })
 
 const day = defineModel()
@@ -29,6 +30,8 @@ flattenDays.unshift({
       :items="flattenDays"
       class="w-36"
       id="select_day_id"
+      :loading="status == 'pending'"
+      :trailing="true"
     />
   </div>
 </template>
