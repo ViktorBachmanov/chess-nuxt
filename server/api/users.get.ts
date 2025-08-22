@@ -3,6 +3,8 @@ export default defineEventHandler(async (event) => {
 
   if (day === 'all') {
     day = '%'
+  } else if (day === undefined) {
+    return await db.query('SELECT u.id, u.name AS label FROM users u')
   }
 
   const users = await db.query(

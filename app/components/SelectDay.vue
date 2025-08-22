@@ -6,12 +6,12 @@ const props = defineProps({
 
 const day = defineModel()
 
-const flattenDays = props.days.map(day => ({
+const objDays = props.days.map(day => ({
   label: new Date(day.date).toLocaleDateString('ru-RU'),
   value: day.date,
 }))
 
-flattenDays.unshift({
+objDays.unshift({
   label: 'Все',
   value: 'all'
 })
@@ -27,7 +27,7 @@ flattenDays.unshift({
     </label>
     <USelect
       v-model="day"
-      :items="flattenDays"
+      :items="objDays"
       class="w-36"
       id="select_day_id"
       :loading="status == 'pending'"
