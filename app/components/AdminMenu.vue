@@ -21,6 +21,11 @@ const items = computed(() => [
       disabled: !loggedIn.value,
       onSelect: openGameAddDialog
     },
+    {
+      label: 'Удалить последнюю',
+      disabled: !loggedIn.value,
+      onSelect: openGameDeleteDialog
+    },
   ]
 ])
 
@@ -30,10 +35,22 @@ function openGameAddDialog() {
   gameAddDialogIsOpen.value = true
 }
 
-const emit = defineEmits(['game-added'])
+const emit = defineEmits(['game-added', 'game-deleted'])
 
 function handleGameAdded() {
   emit('game-added')
+}
+
+//------------------------------------------
+
+const gameDeleteDialogIsOpen = ref(false)
+
+function openGameDeleteDialog() {
+  gameDeleteDialogIsOpen.value = true
+}
+
+function handleGameDeleted() {
+  emit('game-deleted')
 }
 </script>
 
@@ -57,6 +74,12 @@ function handleGameAdded() {
       v-if="gameAddDialogIsOpen"
       @after:leave="gameAddDialogIsOpen = false"
       @added="handleGameAdded"
+    />
+
+    <LazyGameDeleteDialog
+      v-if="gameDeleteDialogIsOpen"
+      @after:leave="gameDeleteDialogIsOpen = false"
+      @deleted="handleGameDeleted"
     />
   </div>
 </template>

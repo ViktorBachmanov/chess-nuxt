@@ -20,6 +20,11 @@ watch(day, newVal => {
   // console.log('day:', day.value)
   refresh()
 })
+
+function handleGamesUpdated() {
+  refreshDays()
+  refresh()
+}
 </script>
 
 <template>
@@ -27,7 +32,8 @@ watch(day, newVal => {
     class="flex justify-between p-4 shadow-lg dark:bg-slate-800"
   >
     <AdminMenu
-      @game-added="() => { refreshDays(), refresh() }"
+      @game-added="handleGamesUpdated"
+      @game-deleted="handleGamesUpdated"
     />
 
     <h1 class="font-medium text-2xl">

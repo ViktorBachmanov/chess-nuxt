@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
 
     db.end()
 
-    return rslt
+    // return rslt
 })
 
 
