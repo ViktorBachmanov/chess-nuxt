@@ -66,16 +66,5 @@ export default defineEventHandler(async (event) => {
 })
 
 
-//////////////////////   helper functions   //////////////////
 
-type RatingRequestResult = {
-    rating: number
-}
-
-async function getRating(userId: number): Promise<number>
-{
-  const rslt: Array<RatingRequestResult> = await db.query(`SELECT rating FROM users WHERE id = ?`, [userId])
-
-  return rslt[0].rating
-}
 

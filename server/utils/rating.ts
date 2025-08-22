@@ -34,3 +34,16 @@ export async function evalRatingDiff(
 
     return ratingDiff
 }
+
+//===============================================================
+
+type RatingRequestResult = {
+    rating: number
+}
+
+export async function getRating(userId: number): Promise<number>
+{
+  const rslt: Array<RatingRequestResult> = await db.query(`SELECT rating FROM users WHERE id = ?`, [userId])
+
+  return rslt[0].rating
+}
