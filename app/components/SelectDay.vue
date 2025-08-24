@@ -6,14 +6,20 @@ const props = defineProps({
 
 const day = defineModel()
 
-const objDays = props.days.map(day => ({
-  label: new Date(day.date).toLocaleDateString('ru-RU'),
-  value: day.date,
-}))
+const objDays = ref([])
 
-objDays.unshift({
-  label: 'Все',
-  value: 'all'
+watch(() => props.days, newDays => {
+  objDays.value = newDays.map(day => ({
+    label: new Date(day.date).toLocaleDateString('ru-RU'),
+    value: day.date,
+  }))
+
+  objDays.value.unshift({
+    label: 'Все',
+    value: 'all'
+  })
+}, {
+  immediate: true
 })
 </script>
 
