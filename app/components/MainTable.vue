@@ -130,7 +130,7 @@ th, :deep(td) {
 th:first-child, :deep(td:first-child) {
   position: sticky;
   left: 0;
-  background-color: #fcfbfdbd;
+  background-color: #fcfbfd;
   min-width: 2em;
 
   .dark & {
@@ -141,7 +141,7 @@ th:first-child, :deep(td:first-child) {
 th:nth-child(2), :deep(td:nth-child(2)) {
   position: sticky;
   left: 2em;
-  background-color: #fcfbfdbd;
+  background-color: #fcfbfd;
   white-space: nowrap;
 
   .dark & {
