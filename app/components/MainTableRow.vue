@@ -17,16 +17,15 @@ const props = defineProps({
     >
       {{ user.name }}
     </td>
+      <td>{{ user.rating }}</td>
+    <td>{{ user.score }}</td>
+    <td>{{ user.games }}</td>
 
     <td
       v-for="cellUser in users"
     >
       {{ user.opponents[cellUser.id] }}
     </td>
-
-    <td>{{ user.score }}</td>
-    <td>{{ user.games }}</td>
-    <td>{{ user.rating }}</td>
   </tr>
 </template>
 

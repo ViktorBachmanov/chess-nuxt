@@ -76,13 +76,17 @@ function updateOpponent (user, opponentId, score) {
         <tr>
           <th>№</th>
           <th>ФИО</th>
-
-          <th
-            v-for="(userIndex, index) in transformedUsers.length"
-          >
-            {{ index + 1 }}
+          <th>
+            <label for="radio_rating_id">
+              Рейтинг
+            </label>
+            <input
+              type="radio"
+              v-model="sortBy"
+              value="rating"
+              id="radio_rating_id"
+            >
           </th>
-
           <th>
             <label for="radio_score_id">
               Очки
@@ -95,16 +99,11 @@ function updateOpponent (user, opponentId, score) {
             >
           </th>
           <th>Игры</th>
-          <th>
-            <label for="radio_rating_id">
-              Рейтинг
-            </label>
-            <input
-              type="radio"
-              v-model="sortBy"
-              value="rating"
-              id="radio_rating_id"
-            >
+
+          <th
+            v-for="(userIndex, index) in transformedUsers.length"
+          >
+            {{ index + 1 }}
           </th>
         </tr>
       </thead>
