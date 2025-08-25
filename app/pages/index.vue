@@ -40,7 +40,17 @@ function handleGamesUpdated() {
       Шахматный клуб
     </h1>
 
-    <ColorModeButton />
+    <div class="flex gap-4 items-center">
+      <ColorModeButton />
+
+      <NuxtLink
+        to="https://github.com/ViktorBachmanov/chess-nuxt"
+        target="_blank"
+        class="w-5 h-5"
+      >
+        <UIcon name="i-uil-github" class="w-5 h-5" />
+      </NuxtLink>
+    </div>
   </div>
 
   <div
